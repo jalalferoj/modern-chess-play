@@ -57,7 +57,9 @@ export default {
 					dark: 'hsl(var(--chess-dark))',
 					selected: 'hsl(var(--chess-selected))',
 					'valid-move': 'hsl(var(--chess-valid-move))',
-					hover: 'hsl(var(--chess-hover))'
+					hover: 'hsl(var(--chess-hover))',
+					'piece-white': 'hsl(var(--chess-piece-white))',
+					'piece-black': 'hsl(var(--chess-piece-black))'
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',

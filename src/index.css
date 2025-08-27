@@ -44,6 +44,8 @@ All colors MUST be HSL.
     --chess-selected: 45 86% 58%;
     --chess-valid-move: 45 86% 58%;
     --chess-hover: 45 25% 80%;
+    --chess-piece-white: 45 25% 95%;
+    --chess-piece-black: 20 14% 15%;
 
     /* Gradients */
     --gradient-board: linear-gradient(135deg, hsl(20 14% 2%), hsl(20 14% 8%));
