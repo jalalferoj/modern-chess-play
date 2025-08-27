@@ -52,6 +52,13 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				chess: {
+					light: 'hsl(var(--chess-light))',
+					dark: 'hsl(var(--chess-dark))',
+					selected: 'hsl(var(--chess-selected))',
+					'valid-move': 'hsl(var(--chess-valid-move))',
+					hover: 'hsl(var(--chess-hover))'
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',

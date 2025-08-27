@@ -8,35 +8,52 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 20 14% 4%;
+    --foreground: 45 23% 95%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 20 14% 6%;
+    --card-foreground: 45 23% 95%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 20 14% 6%;
+    --popover-foreground: 45 23% 95%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 158 64% 18%;
+    --primary-foreground: 45 23% 95%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 45 25% 85%;
+    --secondary-foreground: 20 14% 4%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 20 14% 8%;
+    --muted-foreground: 45 15% 65%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 45 86% 58%;
+    --accent-foreground: 20 14% 4%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 45 23% 95%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 20 14% 12%;
+    --input: 20 14% 12%;
+    --ring: 158 64% 18%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Chess-specific colors */
+    --chess-light: 45 25% 88%;
+    --chess-dark: 158 64% 18%;
+    --chess-selected: 45 86% 58%;
+    --chess-valid-move: 45 86% 58%;
+    --chess-hover: 45 25% 80%;
+
+    /* Gradients */
+    --gradient-board: linear-gradient(135deg, hsl(20 14% 2%), hsl(20 14% 8%));
+    --gradient-piece: linear-gradient(135deg, hsl(45 25% 95%), hsl(45 25% 85%));
+
+    /* Animations */
+    --transition-piece: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: all 0.2s ease-out;
+
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
