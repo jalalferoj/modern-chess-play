@@ -9,7 +9,7 @@ export const ChessPiece = ({ piece, isSelected }: ChessPieceProps) => {
   return (
     <div 
       className={`
-        text-6xl select-none cursor-pointer
+        text-3xl sm:text-4xl md:text-6xl select-none cursor-pointer
         transition-all duration-300 ease-out
         ${isSelected ? 'scale-110 drop-shadow-2xl' : 'hover:scale-105'}
         ${piece.color === 'white' ? 'text-chess-piece-white' : 'text-chess-piece-black'}

@@ -90,11 +90,11 @@ export const ChessBoard = () => {
   return (
     <div className="flex flex-col items-center gap-8">
       <div className="text-center">
-        <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
           Modern Chess
         </h1>
-        <div className="flex items-center gap-4 justify-center">
-          <p className="text-xl text-muted-foreground">
+        <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 justify-center">
+          <p className="text-lg sm:text-xl text-muted-foreground">
             Current Player: 
             <span className={`ml-2 font-semibold ${
               gameState.currentPlayer === 'white' ? 'text-secondary' : 'text-foreground'
@@ -112,7 +112,7 @@ export const ChessBoard = () => {
       </div>
       
       <div 
-        className="grid grid-cols-8 gap-0 p-4 rounded-2xl shadow-2xl border-2 border-border/50"
+        className="grid grid-cols-8 gap-0 p-2 sm:p-3 md:p-4 rounded-xl sm:rounded-2xl shadow-2xl border-2 border-border/50"
         style={{
           background: 'var(--gradient-board)',
         }}
