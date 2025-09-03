@@ -12,12 +12,12 @@ export const ChessPiece = ({ piece, isSelected }: ChessPieceProps) => {
         text-3xl sm:text-4xl md:text-6xl select-none cursor-pointer
         transition-all duration-300 ease-out font-bold
         ${isSelected ? 'scale-110 drop-shadow-2xl' : 'hover:scale-105'}
-        ${piece.color === 'white' ? 'text-gray-700' : 'text-black'}
+        ${piece.color === 'white' ? 'text-white' : 'text-black'}
       `}
       style={{
         filter: isSelected ? 'drop-shadow(0 0 20px hsl(var(--chess-selected)))' : undefined,
         textShadow: piece.color === 'white' 
-          ? '1px 1px 2px rgba(255,255,255,0.5)' 
+          ? '2px 2px 4px rgba(0,0,0,0.9)' 
           : '1px 1px 2px rgba(255,255,255,0.3)'
       }}
     >
