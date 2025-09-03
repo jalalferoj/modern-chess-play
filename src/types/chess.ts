@@ -17,6 +17,14 @@ export interface GameState {
   selectedSquare: Position | null;
   validMoves: Position[];
   gameStatus: 'playing' | 'checkmate' | 'stalemate';
+  castlingRights: {
+    whiteKingSide: boolean;
+    whiteQueenSide: boolean;
+    blackKingSide: boolean;
+    blackQueenSide: boolean;
+  };
+  enPassantTarget: Position | null;
+  inCheck: boolean;
 }
 
 export const PIECE_SYMBOLS: Record<PieceColor, Record<PieceType, string>> = {
