@@ -4,6 +4,7 @@ import { createInitialBoard, getLegalMoves, isPositionEqual, isCheckmate, isStal
 import { ChessSquare } from './ChessSquare';
 import { Button } from './ui/button';
 import { Dialog, DialogContent, DialogTitle } from './ui/dialog';
+import { Maximize, Minimize } from 'lucide-react';
 
 export const ChessBoard = () => {
   const [gameState, setGameState] = useState<GameState>({
@@ -24,6 +25,7 @@ export const ChessBoard = () => {
 
   const [showPromotion, setShowPromotion] = useState(false);
   const [promotionMove, setPromotionMove] = useState<{from: Position, to: Position} | null>(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const handleSquareClick = (position: Position) => {
     if (gameState.gameStatus !== 'playing') return;
@@ -196,15 +198,29 @@ export const ChessBoard = () => {
     });
   };
 
+  const toggleFullscreen = async () => {
+    try {
+      if (!document.fullscreenElement) {
+        await document.documentElement.requestFullscreen();
+        setIsFullscreen(true);
+      } else {
+        await document.exitFullscreen();
+        setIsFullscreen(false);
+      }
+    } catch (error) {
+      console.error('Error toggling fullscreen:', error);
+    }
+  };
+
   return (
-    <div className="flex flex-col items-center gap-8">
+    <div className={`flex flex-col items-center gap-4 sm:gap-6 md:gap-8 ${isFullscreen ? 'h-screen justify-center p-4' : ''}`}>
       <div className="text-center">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
+        <h1 className={`font-bold mb-2 bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent ${isFullscreen ? 'text-2xl sm:text-3xl' : 'text-2xl sm:text-3xl md:text-4xl'}`}>
           Modern Chess
         </h1>
         <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 justify-center">
           <div className="text-center">
-            <p className="text-lg sm:text-xl text-muted-foreground">
+            <p className={`text-muted-foreground ${isFullscreen ? 'text-sm sm:text-base' : 'text-lg sm:text-xl'}`}>
               Current Player: 
               <span className={`ml-2 font-semibold ${
                 gameState.currentPlayer === 'white' ? 'text-secondary' : 'text-foreground'
@@ -216,25 +232,38 @@ export const ChessBoard = () => {
               <p className="text-red-500 font-semibold text-sm">Check!</p>
             )}
             {gameState.gameStatus === 'checkmate' && (
-              <p className="text-red-500 font-bold text-lg">
+              <p className={`text-red-500 font-bold ${isFullscreen ? 'text-base' : 'text-lg'}`}>
                 Checkmate! {gameState.currentPlayer === 'white' ? 'Black' : 'White'} wins!
               </p>
             )}
             {gameState.gameStatus === 'stalemate' && (
-              <p className="text-yellow-500 font-bold text-lg">Stalemate! It's a draw!</p>
+              <p className={`text-yellow-500 font-bold ${isFullscreen ? 'text-base' : 'text-lg'}`}>Stalemate! It's a draw!</p>
             )}
           </div>
-          <button
-            onClick={resetGame}
-            className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
-          >
-            New Game
-          </button>
+          <div className="flex gap-2">
+            <button
+              onClick={resetGame}
+              className={`px-3 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors ${isFullscreen ? 'text-sm' : 'px-4'}`}
+            >
+              New Game
+            </button>
+            <button
+              onClick={toggleFullscreen}
+              className={`px-3 py-2 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/90 transition-colors ${isFullscreen ? 'text-sm' : 'px-4'}`}
+              title={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
+            >
+              {isFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
+            </button>
+          </div>
         </div>
       </div>
       
       <div 
-        className="grid grid-cols-8 gap-0 p-2 sm:p-3 md:p-4 rounded-xl sm:rounded-2xl shadow-2xl border-2 border-border/50"
+        className={`grid grid-cols-8 gap-0 rounded-xl shadow-2xl border-2 border-border/50 ${
+          isFullscreen 
+            ? 'p-2 sm:p-3 max-h-[70vh] max-w-[70vh] aspect-square' 
+            : 'p-2 sm:p-3 md:p-4 sm:rounded-2xl'
+        }`}
         style={{
           background: 'var(--gradient-board)',
         }}
@@ -261,12 +290,14 @@ export const ChessBoard = () => {
         )}
       </div>
       
-      <div className="text-center max-w-md">
-        <p className="text-muted-foreground">
-          Click on a piece to select it, then click on a highlighted square to move.
-          Capture opponent pieces by moving to their square.
-        </p>
-      </div>
+      {!isFullscreen && (
+        <div className="text-center max-w-md">
+          <p className="text-muted-foreground">
+            Click on a piece to select it, then click on a highlighted square to move.
+            Capture opponent pieces by moving to their square.
+          </p>
+        </div>
+      )}
 
       <Dialog open={showPromotion} onOpenChange={setShowPromotion}>
         <DialogContent className="sm:max-w-md">

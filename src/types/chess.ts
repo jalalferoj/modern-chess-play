@@ -29,12 +29,12 @@ export interface GameState {
 
 export const PIECE_SYMBOLS: Record<PieceColor, Record<PieceType, string>> = {
   white: {
-    king: '♔',
-    queen: '♕',
-    rook: '♖',
-    bishop: '♗',
-    knight: '♘',
-    pawn: '♙'
+    king: '♚',
+    queen: '♛',
+    rook: '♜',
+    bishop: '♝',
+    knight: '♞',
+    pawn: '♟'
   },
   black: {
     king: '♚',
