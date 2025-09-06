@@ -38,7 +38,7 @@ All colors MUST be HSL.
 
     --radius: 0.75rem;
 
-    /* Chess-specific colors */
+    /* Chess-specific colors - Classic Theme */
     --chess-light: 45 25% 88%;
     --chess-dark: 158 64% 18%;
     --chess-selected: 45 86% 58%;
@@ -110,6 +110,34 @@ All colors MUST be HSL.
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  /* Chess Board Themes */
+  .chess-theme-classic {
+    --chess-light: 45 25% 88%;
+    --chess-dark: 158 64% 18%;
+    --chess-selected: 45 86% 58%;
+    --chess-valid-move: 45 86% 58%;
+    --chess-hover: 45 25% 80%;
+    --gradient-board: linear-gradient(135deg, hsl(20 14% 2%), hsl(20 14% 8%));
+  }
+
+  .chess-theme-dark {
+    --chess-light: 220 13% 18%;
+    --chess-dark: 220 13% 9%;
+    --chess-selected: 142 76% 36%;
+    --chess-valid-move: 142 76% 36%;
+    --chess-hover: 220 13% 25%;
+    --gradient-board: linear-gradient(135deg, hsl(220 13% 5%), hsl(220 13% 12%));
+  }
+
+  .chess-theme-light {
+    --chess-light: 0 0% 100%;
+    --chess-dark: 0 0% 85%;
+    --chess-selected: 210 40% 50%;
+    --chess-valid-move: 210 40% 50%;
+    --chess-hover: 0 0% 95%;
+    --gradient-board: linear-gradient(135deg, hsl(0 0% 98%), hsl(0 0% 92%));
   }
 }
 

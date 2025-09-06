@@ -8,6 +8,12 @@ interface ChessSquareProps {
   isValidMove: boolean;
   onClick: (position: Position) => void;
   isFullscreen?: boolean;
+  isLastMove?: boolean;
+  isAnimating?: boolean;
+  onDragStart?: (position: Position) => void;
+  onDragOver?: (position: Position) => void;
+  onDragEnd?: () => void;
+  isDragOver?: boolean;
 }
 
 export const ChessSquare = ({ 
@@ -16,7 +22,13 @@ export const ChessSquare = ({
   isSelected, 
   isValidMove, 
   onClick,
-  isFullscreen = false
+  isFullscreen = false,
+  isLastMove = false,
+  isAnimating = false,
+  onDragStart,
+  onDragOver,
+  onDragEnd,
+  isDragOver = false
 }: ChessSquareProps) => {
   const { row, col } = position;
   const isLight = (row + col) % 2 === 0;
@@ -33,6 +45,12 @@ export const ChessSquare = ({
     
     if (isSelected) {
       baseClass += ' bg-chess-selected shadow-lg scale-105 z-10';
+    } else if (isDragOver) {
+      baseClass += ` ${isLight ? 'bg-chess-light' : 'bg-chess-dark'} 
+        ring-2 ring-blue-400/80 ring-inset`;
+    } else if (isLastMove) {
+      baseClass += ` ${isLight ? 'bg-chess-light' : 'bg-chess-dark'} 
+        ring-2 ring-yellow-400/80 ring-inset`;
     } else if (isValidMove) {
       baseClass += ` ${isLight ? 'bg-chess-light' : 'bg-chess-dark'} 
         ring-4 ring-chess-valid-move/60 ring-inset`;
@@ -47,10 +65,26 @@ export const ChessSquare = ({
 
   return (
     <div 
-      className={getSquareClass()}
+      className={`${getSquareClass()} ${isAnimating ? 'animate-pulse' : ''}`}
       onClick={() => onClick(position)}
+      onDragOver={(e) => {
+        e.preventDefault();
+        onDragOver?.(position);
+      }}
+      onDrop={(e) => {
+        e.preventDefault();
+        onDragEnd?.();
+      }}
     >
-      {piece && <ChessPiece piece={piece} isSelected={isSelected} isFullscreen={isFullscreen} />}
+      {piece && (
+        <div
+          draggable
+          onDragStart={() => onDragStart?.(position)}
+          className="cursor-grab active:cursor-grabbing"
+        >
+          <ChessPiece piece={piece} isSelected={isSelected} isFullscreen={isFullscreen} />
+        </div>
+      )}
       {isValidMove && !piece && (
         <div className={`rounded-full bg-chess-valid-move/70 shadow-lg ${
           isFullscreen 
