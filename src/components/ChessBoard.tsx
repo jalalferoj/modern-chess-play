@@ -213,9 +213,9 @@ export const ChessBoard = () => {
   };
 
   return (
-    <div className={`flex flex-col items-center gap-4 sm:gap-6 md:gap-8 ${isFullscreen ? 'h-screen justify-center p-4' : ''}`}>
+    <div className={`flex flex-col items-center gap-4 sm:gap-6 md:gap-8 ${isFullscreen ? 'h-screen justify-center p-1 sm:p-2 md:p-4' : ''}`}>
       <div className="text-center">
-        <h1 className={`font-bold mb-2 bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent ${isFullscreen ? 'text-2xl sm:text-3xl' : 'text-2xl sm:text-3xl md:text-4xl'}`}>
+        <h1 className={`font-bold mb-2 bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent ${isFullscreen ? 'text-lg sm:text-xl md:text-2xl lg:text-3xl' : 'text-2xl sm:text-3xl md:text-4xl'}`}>
           Modern Chess
         </h1>
         <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 justify-center">
@@ -243,16 +243,16 @@ export const ChessBoard = () => {
           <div className="flex gap-2">
             <button
               onClick={resetGame}
-              className={`px-3 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors ${isFullscreen ? 'text-sm' : 'px-4'}`}
+              className={`px-2 py-1 sm:px-3 sm:py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors ${isFullscreen ? 'text-xs sm:text-sm' : 'px-4'}`}
             >
               New Game
             </button>
             <button
               onClick={toggleFullscreen}
-              className={`px-3 py-2 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/90 transition-colors ${isFullscreen ? 'text-sm' : 'px-4'}`}
+              className={`px-2 py-1 sm:px-3 sm:py-2 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/90 transition-colors ${isFullscreen ? 'text-xs sm:text-sm' : 'px-4'}`}
               title={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
             >
-              {isFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
+              {isFullscreen ? <Minimize className="w-3 h-3 sm:w-4 sm:h-4" /> : <Maximize className="w-4 h-4" />}
             </button>
           </div>
         </div>
@@ -261,7 +261,7 @@ export const ChessBoard = () => {
       <div 
         className={`grid grid-cols-8 gap-0 rounded-xl shadow-2xl border-2 border-border/50 ${
           isFullscreen 
-            ? 'p-2 sm:p-3 max-h-[70vh] max-w-[70vh] aspect-square' 
+            ? 'p-2 sm:p-4 md:p-6 lg:p-8 w-[95vh] h-[95vh] max-w-[95vw] max-h-[95vw] aspect-square' 
             : 'p-2 sm:p-3 md:p-4 sm:rounded-2xl'
         }`}
         style={{
@@ -284,6 +284,7 @@ export const ChessBoard = () => {
                 isSelected={!!isSelected}
                 isValidMove={isValidMove}
                 onClick={handleSquareClick}
+                isFullscreen={isFullscreen}
               />
             );
           })

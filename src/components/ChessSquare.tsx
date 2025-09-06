@@ -7,6 +7,7 @@ interface ChessSquareProps {
   isSelected: boolean;
   isValidMove: boolean;
   onClick: (position: Position) => void;
+  isFullscreen?: boolean;
 }
 
 export const ChessSquare = ({ 
@@ -14,16 +15,20 @@ export const ChessSquare = ({
   piece, 
   isSelected, 
   isValidMove, 
-  onClick 
+  onClick,
+  isFullscreen = false
 }: ChessSquareProps) => {
   const { row, col } = position;
   const isLight = (row + col) % 2 === 0;
   
   const getSquareClass = () => {
     let baseClass = `
-      w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 flex items-center justify-center
-      cursor-pointer transition-all duration-200 ease-out
+      flex items-center justify-center cursor-pointer transition-all duration-200 ease-out
       relative border border-border/20
+      ${isFullscreen 
+        ? 'w-12 h-12 xs:w-14 xs:h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 xl:w-28 xl:h-28' 
+        : 'w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20'
+      }
     `;
     
     if (isSelected) {
@@ -45,9 +50,13 @@ export const ChessSquare = ({
       className={getSquareClass()}
       onClick={() => onClick(position)}
     >
-      {piece && <ChessPiece piece={piece} isSelected={isSelected} />}
+      {piece && <ChessPiece piece={piece} isSelected={isSelected} isFullscreen={isFullscreen} />}
       {isValidMove && !piece && (
-        <div className="w-3 h-3 sm:w-4 sm:h-4 md:w-6 md:h-6 rounded-full bg-chess-valid-move/70 shadow-lg" />
+        <div className={`rounded-full bg-chess-valid-move/70 shadow-lg ${
+          isFullscreen 
+            ? 'w-3 h-3 xs:w-4 xs:h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-8 lg:h-8 xl:w-10 xl:h-10' 
+            : 'w-3 h-3 sm:w-4 sm:h-4 md:w-6 md:h-6'
+        }`} />
       )}
     </div>
   );
